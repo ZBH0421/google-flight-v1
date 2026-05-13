@@ -1,8 +1,6 @@
 from datetime import datetime, timedelta
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from fli.models import Airline, Airport, FlightLeg, FlightResult
 from fli.search.multi_country import CountryResult, search_all_countries
 
@@ -43,9 +41,11 @@ def test_search_all_countries_returns_result_per_country():
     mock_flights = [_make_flight(250.0)]
     countries = [("IN", "India"), ("MX", "Mexico")]
 
-    with patch("fli.search.multi_country.TorManager") as mock_tor, \
-         patch("fli.search.multi_country.Client") as mock_client_cls, \
-         patch("fli.search.multi_country.SearchFlights") as mock_search_cls:
+    with (
+        patch("fli.search.multi_country.TorManager"),
+        patch("fli.search.multi_country.Client"),
+        patch("fli.search.multi_country.SearchFlights") as mock_search_cls,
+    ):
         mock_search_cls.return_value.search.return_value = mock_flights
 
         results = search_all_countries(MagicMock(), countries=countries)

@@ -81,7 +81,7 @@ def _search_one_country(
                 continue  # empty result → retry with new circuit
         except TorNotRunningError:
             raise  # propagate immediately, don't retry
-        except Exception:
+        except Exception:  # lower layers wrap all errors; retry on any transient failure
             if attempt < MAX_RETRIES:
                 continue
     return CountryResult(country_code, country_name, None, "blocked")
