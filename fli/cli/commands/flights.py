@@ -198,60 +198,25 @@ def _search_flights_core(
             f"{departure_window[0]}-{departure_window[1]}" if departure_window else None
         )
 
-        # Parse parameters using shared utilities
-        origin_airport = resolve_airport(origin)
-        destination_airport = resolve_airport(destination)
-        seat_type = parse_cabin_class(cabin_class)
-        stops = parse_max_stops(max_stops)
-        parsed_airlines = parse_airlines(airlines)
-        sort = parse_sort_by(sort_by)
-        emissions_filter = parse_emissions(emissions)
-
-        # Build time restrictions from tuple
-        time_restrictions = None
-        if departure_window:
-            from fli.models import TimeRestrictions
-
-            time_restrictions = TimeRestrictions(
-                earliest_departure=departure_window[0],
-                latest_departure=departure_window[1],
-            )
-
-        # Create flight segments using shared builder
-        segments, trip_type = build_flight_segments(
-            origin=origin_airport,
-            destination=destination_airport,
+        # Build filters using shared helper (avoids duplicating filter construction)
+        filters = _build_filters(
+            origin=origin,
+            destination=destination,
             departure_date=departure_date,
             return_date=return_date,
-            time_restrictions=time_restrictions,
-        )
-
-        # Parse layover airports
-        layover_restrictions = None
-        if layover:
-            layover_airports = [resolve_airport(code) for code in layover]
-            layover_restrictions = LayoverRestrictions(airports=layover_airports)
-
-        # Build bags filter
-        bags_filter = None
-        if checked_bags > 0 or carry_on:
-            bags_filter = BagsFilter(checked_bags=checked_bags, carry_on=carry_on)
-
-        # Create search filters
-        filters = FlightSearchFilters(
-            trip_type=trip_type,
-            passenger_info=PassengerInfo(adults=1),
-            flight_segments=segments,
-            stops=stops,
-            seat_type=seat_type,
-            airlines=parsed_airlines,
-            sort_by=sort,
+            departure_window=departure_window,
+            airlines=airlines,
+            cabin_class=cabin_class,
+            max_stops=max_stops,
+            sort_by=sort_by,
             exclude_basic_economy=exclude_basic_economy,
-            layover_restrictions=layover_restrictions,
-            emissions=emissions_filter,
-            bags=bags_filter,
-            show_all_results=all_results,
+            layover=layover,
+            emissions=emissions,
+            checked_bags=checked_bags,
+            carry_on=carry_on,
+            all_results=all_results,
         )
+        trip_type = filters.trip_type
 
         # Perform search
         search_client = SearchFlights()
@@ -482,7 +447,7 @@ def flights(
                 carry_on=carry_on,
                 all_results=all_results,
             )
-        except Exception as e:
+        except (ParseError, AttributeError, ValueError) as e:
             typer.echo(f"Error: {e}")
             raise typer.Exit(1) from e
 

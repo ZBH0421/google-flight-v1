@@ -47,6 +47,7 @@ def test_compare_countries_flag_calls_search_all_countries(runner):
         )
     assert result.exit_code == 0
     mock_search.assert_called_once()
+    assert "India" in result.output
 
 
 def test_compare_countries_with_custom_countries_list(runner):
@@ -55,7 +56,7 @@ def test_compare_countries_with_custom_countries_list(runner):
     ]
     with patch(
         "fli.cli.commands.flights.search_all_countries", return_value=mock_results
-    ):
+    ) as mock_search:
         result = runner.invoke(
             app,
             [
@@ -69,6 +70,9 @@ def test_compare_countries_with_custom_countries_list(runner):
             ],
         )
     assert result.exit_code == 0
+    mock_search.assert_called_once()
+    _, kwargs = mock_search.call_args
+    assert kwargs["countries"] == [("IN", "India")]
 
 
 def test_compare_countries_shows_tor_not_running_error(runner):
