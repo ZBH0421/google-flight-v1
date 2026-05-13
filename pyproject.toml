@@ -41,8 +41,12 @@ mcp = [
     "pydantic-settings>=2.0.0",
     "uvicorn>=0.34.0",
 ]
+vpn = [
+    "stem>=1.8.0",
+]
 all = [
     "flights[mcp]",
+    "flights[vpn]",
 ]
 dev = [
     "mkdocs-material[imaging]>=9.5.49",

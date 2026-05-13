@@ -637,7 +637,7 @@ wheels = [
 
 [[package]]
 name = "flights"
-version = "0.8.2"
+version = "0.8.4"
 source = { editable = "." }
 dependencies = [
     { name = "babel" },
@@ -656,6 +656,7 @@ all = [
     { name = "fastapi" },
     { name = "fastmcp" },
     { name = "pydantic-settings" },
+    { name = "stem" },
     { name = "uvicorn" },
 ]
 dev = [
@@ -674,6 +675,9 @@ mcp = [
     { name = "pydantic-settings" },
     { name = "uvicorn" },
 ]
+vpn = [
+    { name = "stem" },
+]
 
 [package.metadata]
 requires-dist = [
@@ -682,6 +686,7 @@ requires-dist = [
     { name = "fastapi", marker = "extra == 'mcp'", specifier = ">=0.115.6" },
     { name = "fastmcp", marker = "extra == 'mcp'", specifier = ">=3.2" },
     { name = "flights", extras = ["mcp"], marker = "extra == 'all'" },
+    { name = "flights", extras = ["vpn"], marker = "extra == 'all'" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "mkdocs-material", extras = ["imaging"], marker = "extra == 'dev'", specifier = ">=9.5.49" },
     { name = "mkdocstrings", extras = ["python"], marker = "extra == 'dev'", specifier = ">=0.27.0" },
@@ -695,12 +700,13 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "ratelimit", specifier = ">=2.2.1" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.8.4" },
+    { name = "stem", marker = "extra == 'vpn'", specifier = ">=1.8.0" },
     { name = "tenacity", specifier = ">=9.0.0" },
     { name = "twine", marker = "extra == 'dev'", specifier = ">=6.0.0" },
     { name = "typer", specifier = ">=0.15.1" },
     { name = "uvicorn", marker = "extra == 'mcp'", specifier = ">=0.34.0" },
 ]
-provides-extras = ["mcp", "all", "dev"]
+provides-extras = ["mcp", "vpn", "all", "dev"]
 
 [[package]]
 name = "ghp-import"
@@ -2072,6 +2078,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/04/57/d062573f391d06271
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f7/1f/b876b1f83aef204198a42dc101613fefccb32258e5428b5f9259677864b4/starlette-0.47.2-py3-none-any.whl", hash = "sha256:c5847e96134e5c5371ee9fac6fdf1a67336d5815e09eb2a01fdb57a351ef915b", size = 72984, upload-time = "2025-07-20T17:31:56.738Z" },
 ]
+
+[[package]]
+name = "stem"
+version = "1.8.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/94/c6/b2258155546f966744e78b9862f62bd2b8671b422bb9951a1330e4c8fd73/stem-1.8.2.tar.gz", hash = "sha256:83fb19ffd4c9f82207c006051480389f80af221a7e4783000aedec4e384eb582", size = 2859640, upload-time = "2023-06-06T06:37:21.251Z" }
 
 [[package]]
 name = "tenacity"
