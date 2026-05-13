@@ -16,6 +16,11 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 
 client = None
 
+TOR_PROXIES: dict[str, str] = {
+    "http": "socks5://127.0.0.1:9050",
+    "https": "socks5://127.0.0.1:9050",
+}
+
 
 class Client:
     """HTTP client with built-in rate limiting, retry and user agent impersonation functionality."""
@@ -24,10 +29,11 @@ class Client:
         "content-type": "application/x-www-form-urlencoded;charset=UTF-8",
     }
 
-    def __init__(self):
+    def __init__(self, proxies: dict[str, str] | None = None):
         """Initialize a new client session with default headers."""
         self._client = requests.Session()
         self._client.headers.update(self.DEFAULT_HEADERS)
+        self._proxies = proxies
 
     def __del__(self):
         """Clean up client session on deletion."""
@@ -51,6 +57,8 @@ class Client:
             Exception: If request fails after all retries
 
         """
+        if self._proxies:
+            kwargs.setdefault("proxies", self._proxies)
         try:
             response = self._client.get(url, **kwargs)
             response.raise_for_status()
@@ -75,6 +83,8 @@ class Client:
             Exception: If request fails after all retries
 
         """
+        if self._proxies:
+            kwargs.setdefault("proxies", self._proxies)
         try:
             response = self._client.post(url, **kwargs)
             response.raise_for_status()

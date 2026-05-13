@@ -7,6 +7,7 @@ with Google Flights' API to find available flights and their details.
 import json
 from copy import deepcopy
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 from fli.core import extract_currency_from_price_token
 from fli.models import (
@@ -18,6 +19,9 @@ from fli.models import (
 )
 from fli.models.google_flights.base import TripType
 from fli.search.client import get_client
+
+if TYPE_CHECKING:
+    from fli.search.client import Client
 
 
 class SearchFlights:
@@ -32,9 +36,10 @@ class SearchFlights:
         "content-type": "application/x-www-form-urlencoded;charset=UTF-8",
     }
 
-    def __init__(self):
+    def __init__(self, client: "Client | None" = None):
         """Initialize the search client for flight searches."""
-        self.client = get_client()
+        from fli.search.client import Client
+        self.client = client if client is not None else get_client()
 
     def search(
         self, filters: FlightSearchFilters, top_n: int = 5
