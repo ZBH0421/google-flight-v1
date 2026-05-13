@@ -1,6 +1,6 @@
 from unittest.mock import MagicMock, patch
 
-from fli.search.client import Client, TOR_PROXIES
+from fli.search.client import TOR_PROXIES, Client
 from fli.search.flights import SearchFlights
 
 
@@ -40,5 +40,5 @@ def test_search_flights_uses_custom_client():
 def test_search_flights_uses_default_client_when_none():
     with patch("fli.search.flights.get_client") as mock_get:
         mock_get.return_value = MagicMock()
-        search = SearchFlights()
+        SearchFlights()
     mock_get.assert_called_once()

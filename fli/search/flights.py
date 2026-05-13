@@ -38,7 +38,6 @@ class SearchFlights:
 
     def __init__(self, client: "Client | None" = None):
         """Initialize the search client for flight searches."""
-        from fli.search.client import Client
         self.client = client if client is not None else get_client()
 
     def search(
