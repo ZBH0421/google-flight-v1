@@ -29,12 +29,13 @@ fli/
 ├── vpn/
 │   ├── __init__.py
 │   ├── tor_manager.py      # Tor circuit control via stem
-│   └── countries.py        # CHEAP_COUNTRIES constant
+│   └── countries.py        # load from countries.toml, fallback to defaults
 ├── search/
 │   ├── client.py           # Add optional proxies param
 │   └── multi_country.py    # Sequential per-country search runner
 └── cli/
-    └── main.py             # Add --compare-countries flag to flights command
+    └── main.py             # Add --compare-countries + --countries flags
+fli/vpn/countries.toml      # user-editable country list (bundled default)
 ```
 
 ## Query Flow
@@ -67,13 +68,33 @@ class TorManager:
 - `switch_country`: connects to ControlPort 9051, sets ExitNodes, signals NEWNYM, polls for new circuit (max 30s), restores ExitNodes="" on exit
 - `is_tor_running`: checks ports 9050 (SOCKS) and 9051 (Control) are listening; raises with setup instructions if not
 
+### `fli/vpn/countries.toml` (user-editable)
+
+```toml
+# Add or remove countries here — no code changes needed
+[[countries]]
+code = "IN"
+name = "India"
+
+[[countries]]
+code = "MX"
+name = "Mexico"
+
+# ... etc for all 8 defaults
+```
+
 ### `fli/vpn/countries.py`
 
-```python
-CHEAP_COUNTRIES: list[tuple[str, str]] = [
-    ("IN", "India"), ("MX", "Mexico"), ("TH", "Thailand"), ("TR", "Turkey"),
-    ("BR", "Brazil"), ("ID", "Indonesia"), ("VN", "Vietnam"), ("MY", "Malaysia"),
-]
+Loads `countries.toml` from the package directory. Provides `load_countries() -> list[tuple[str, str]]`.
+
+### CLI `--countries` flag (temporary override)
+
+```bash
+# Use default list from countries.toml
+fli flights TPE NRT 2026-10-25 --compare-countries
+
+# Override with a custom list for this run only
+fli flights TPE NRT 2026-10-25 --compare-countries --countries IN,MX,KR
 ```
 
 ### `fli/search/multi_country.py`
@@ -89,7 +110,8 @@ class CountryResult:
 def search_all_countries(filters: FlightSearchFilters) -> list[CountryResult]
 ```
 
-- Iterates CHEAP_COUNTRIES sequentially
+- Iterates countries sequentially
+- Per-country retry: on 403/429/empty result, issues `SIGNAL NEWNYM` and retries up to 2 times before marking `error="blocked"`
 - Single country failure does not abort the run
 - Returns all results including failed ones
 
@@ -120,7 +142,7 @@ Cheapest: Vietnam (VN)  $275
 |-------|-----------|----------|
 | Tor not running | Port 9050/9051 not listening | Print setup instructions, exit cleanly |
 | Circuit timeout | Exit node unavailable after 30s | Mark country as `error="circuit timeout"`, continue |
-| Google blocks Tor IP | 403 / 429 / empty result | Mark country as `error="blocked"`, continue |
+| Google blocks Tor IP | 403 / 429 / empty result | SIGNAL NEWNYM + retry up to 2×; if all fail, mark `error="blocked"`, continue |
 
 ## Prerequisites (user-side)
 
@@ -147,5 +169,5 @@ No integration tests requiring a live Tor connection. Real-world acceptance test
 
 - MCP server integration (CLI only for now)
 - Result persistence / history comparison
-- Automatic retry for blocked countries
+- Persistent per-country block history (always retries fresh each run)
 - Parallel execution (can be added later if sequential is too slow)
