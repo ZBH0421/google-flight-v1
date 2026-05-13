@@ -1,5 +1,3 @@
-import socket
-from contextlib import contextmanager
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -33,9 +31,11 @@ def test_country_exit_sets_exit_node_before_yielding():
     set_conf_calls = []
     mock_controller.set_conf.side_effect = lambda k, v: set_conf_calls.append((k, v))
 
-    with patch.object(TorManager, "is_tor_running", return_value=True), \
-         patch("fli.vpn.tor_manager.Controller") as mock_ctrl_class, \
-         patch("fli.vpn.tor_manager.time.sleep"):
+    with (
+        patch.object(TorManager, "is_tor_running", return_value=True),
+        patch("fli.vpn.tor_manager.Controller") as mock_ctrl_class,
+        patch("fli.vpn.tor_manager.time.sleep"),
+    ):
         mock_ctrl_class.from_port.return_value.__enter__ = lambda s: mock_controller
         mock_ctrl_class.from_port.return_value.__exit__ = MagicMock(return_value=False)
 
@@ -58,9 +58,11 @@ def test_country_exit_restores_exit_nodes_even_on_exception():
 
     mock_controller.set_conf.side_effect = tracking_set_conf
 
-    with patch.object(TorManager, "is_tor_running", return_value=True), \
-         patch("fli.vpn.tor_manager.Controller") as mock_ctrl_class, \
-         patch("fli.vpn.tor_manager.time.sleep"):
+    with (
+        patch.object(TorManager, "is_tor_running", return_value=True),
+        patch("fli.vpn.tor_manager.Controller") as mock_ctrl_class,
+        patch("fli.vpn.tor_manager.time.sleep"),
+    ):
         mock_ctrl_class.from_port.return_value.__enter__ = lambda s: mock_controller
         mock_ctrl_class.from_port.return_value.__exit__ = MagicMock(return_value=False)
 
