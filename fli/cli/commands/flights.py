@@ -52,8 +52,11 @@ def _display_country_comparison(results: list[CountryResult]) -> None:
     table.add_column("Status", width=10)
 
     for r in results:
-        if r.error:
-            table.add_row(r.country_name, r.country_code, "-", "-", f"[red]{r.error}[/red]")
+        if not r.flights:
+            error_msg = r.error or "no results"
+            table.add_row(
+                r.country_name, r.country_code, "-", "-", f"[red]{error_msg}[/red]"
+            )
         else:
             cheapest = min(f.price for f in r.flights)
             table.add_row(

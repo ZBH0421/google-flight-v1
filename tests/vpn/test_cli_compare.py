@@ -38,11 +38,9 @@ def test_compare_countries_flag_calls_search_all_countries(runner):
         CountryResult("IN", "India", [_make_flight(250.0)], None),
         CountryResult("MX", "Mexico", None, "blocked"),
     ]
-    mock_search_patch = patch(
+    with patch(
         "fli.cli.commands.flights.search_all_countries", return_value=mock_results
-    )
-    mock_tor_patch = patch("fli.cli.commands.flights.TorNotRunningError", Exception)
-    with mock_search_patch as mock_search, mock_tor_patch:
+    ) as mock_search:
         result = runner.invoke(
             app,
             ["flights", "JFK", "LAX", datetime.now().strftime("%Y-%m-%d"), "--compare-countries"],
@@ -55,9 +53,8 @@ def test_compare_countries_with_custom_countries_list(runner):
     mock_results = [
         CountryResult("IN", "India", [_make_flight(200.0)], None),
     ]
-    with (
-        patch("fli.cli.commands.flights.search_all_countries", return_value=mock_results),
-        patch("fli.cli.commands.flights.TorNotRunningError", Exception),
+    with patch(
+        "fli.cli.commands.flights.search_all_countries", return_value=mock_results
     ):
         result = runner.invoke(
             app,
