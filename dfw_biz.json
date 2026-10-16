@@ -1,0 +1,305 @@
+{
+  "success": true,
+  "data_source": "google_flights",
+  "search_type": "dates",
+  "trip_type": "ONE_WAY",
+  "query": {
+    "origin": "TPE",
+    "destination": "DFW",
+    "start_date": "2026-05-15",
+    "end_date": "2026-06-30",
+    "trip_duration": 3,
+    "is_round_trip": false,
+    "cabin_class": "BUSINESS",
+    "max_stops": "ANY",
+    "departure_window": null,
+    "airlines": null,
+    "sort_by_price": false,
+    "days": []
+  },
+  "count": 47,
+  "dates": [
+    {
+      "departure_date": "2026-05-15",
+      "return_date": null,
+      "price": 93359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-16",
+      "return_date": null,
+      "price": 93359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-17",
+      "return_date": null,
+      "price": 93359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-18",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-19",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-20",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-21",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-22",
+      "return_date": null,
+      "price": 100380.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-23",
+      "return_date": null,
+      "price": 92984.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-24",
+      "return_date": null,
+      "price": 93359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-25",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-26",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-27",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-28",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-29",
+      "return_date": null,
+      "price": 93359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-30",
+      "return_date": null,
+      "price": 95406.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-05-31",
+      "return_date": null,
+      "price": 93359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-01",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-02",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-03",
+      "return_date": null,
+      "price": 92827.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-04",
+      "return_date": null,
+      "price": 92827.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-05",
+      "return_date": null,
+      "price": 102023.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-06",
+      "return_date": null,
+      "price": 94599.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-07",
+      "return_date": null,
+      "price": 93359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-08",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-09",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-10",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-11",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-12",
+      "return_date": null,
+      "price": 93359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-13",
+      "return_date": null,
+      "price": 102023.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-14",
+      "return_date": null,
+      "price": 92827.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-15",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-16",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-17",
+      "return_date": null,
+      "price": 92359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-18",
+      "return_date": null,
+      "price": 93299.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-19",
+      "return_date": null,
+      "price": 94816.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-20",
+      "return_date": null,
+      "price": 101897.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-21",
+      "return_date": null,
+      "price": 94599.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-22",
+      "return_date": null,
+      "price": 92827.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-23",
+      "return_date": null,
+      "price": 93516.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-24",
+      "return_date": null,
+      "price": 93299.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-25",
+      "return_date": null,
+      "price": 93516.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-26",
+      "return_date": null,
+      "price": 94599.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-27",
+      "return_date": null,
+      "price": 108397.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-28",
+      "return_date": null,
+      "price": 92827.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-29",
+      "return_date": null,
+      "price": 98359.0,
+      "currency": "TWD"
+    },
+    {
+      "departure_date": "2026-06-30",
+      "return_date": null,
+      "price": 92827.0,
+      "currency": "TWD"
+    }
+  ]
+}

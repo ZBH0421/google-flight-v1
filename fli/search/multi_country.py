@@ -1,5 +1,6 @@
 """Sequential multi-country flight search via Tor exit nodes."""
 
+import concurrent.futures
 from dataclasses import dataclass
 
 import typer
@@ -11,6 +12,7 @@ from fli.vpn.countries import CHEAP_COUNTRIES
 from fli.vpn.tor_manager import TorManager, TorNotRunningError
 
 MAX_RETRIES = 2
+COUNTRY_TIMEOUT = 30
 
 
 @dataclass
@@ -66,6 +68,20 @@ def search_all_countries(
 
 
 def _search_one_country(
+    filters: FlightSearchFilters,
+    country_code: str,
+    country_name: str,
+) -> CountryResult:
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    future = executor.submit(_search_with_retries, filters, country_code, country_name)
+    executor.shutdown(wait=False)
+    try:
+        return future.result(timeout=COUNTRY_TIMEOUT)
+    except concurrent.futures.TimeoutError:
+        return CountryResult(country_code, country_name, None, "timeout")
+
+
+def _search_with_retries(
     filters: FlightSearchFilters,
     country_code: str,
     country_name: str,

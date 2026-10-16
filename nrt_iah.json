@@ -1,0 +1,101 @@
+{
+  "success": true,
+  "data_source": "google_flights",
+  "search_type": "dates",
+  "trip_type": "ONE_WAY",
+  "query": {
+    "origin": "NRT",
+    "destination": "IAH",
+    "start_date": "2026-06-03",
+    "end_date": "2026-06-15",
+    "trip_duration": 3,
+    "is_round_trip": false,
+    "cabin_class": "ECONOMY",
+    "max_stops": "ANY",
+    "departure_window": null,
+    "airlines": null,
+    "sort_by_price": false,
+    "days": []
+  },
+  "count": 13,
+  "dates": [
+    {
+      "departure_date": "2026-06-03",
+      "return_date": null,
+      "price": 401.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-04",
+      "return_date": null,
+      "price": 681.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-05",
+      "return_date": null,
+      "price": 401.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-06",
+      "return_date": null,
+      "price": 432.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-07",
+      "return_date": null,
+      "price": 629.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-08",
+      "return_date": null,
+      "price": 477.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-09",
+      "return_date": null,
+      "price": 476.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-10",
+      "return_date": null,
+      "price": 476.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-11",
+      "return_date": null,
+      "price": 516.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-12",
+      "return_date": null,
+      "price": 516.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-13",
+      "return_date": null,
+      "price": 644.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-14",
+      "return_date": null,
+      "price": 572.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-15",
+      "return_date": null,
+      "price": 660.0,
+      "currency": "GBP"
+    }
+  ]
+}

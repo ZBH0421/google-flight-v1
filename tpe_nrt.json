@@ -1,0 +1,83 @@
+{
+  "success": true,
+  "data_source": "google_flights",
+  "search_type": "dates",
+  "trip_type": "ONE_WAY",
+  "query": {
+    "origin": "TPE",
+    "destination": "NRT",
+    "start_date": "2026-06-01",
+    "end_date": "2026-06-10",
+    "trip_duration": 3,
+    "is_round_trip": false,
+    "cabin_class": "ECONOMY",
+    "max_stops": "ANY",
+    "departure_window": null,
+    "airlines": null,
+    "sort_by_price": false,
+    "days": []
+  },
+  "count": 10,
+  "dates": [
+    {
+      "departure_date": "2026-06-01",
+      "return_date": null,
+      "price": 108.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-02",
+      "return_date": null,
+      "price": 115.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-03",
+      "return_date": null,
+      "price": 108.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-04",
+      "return_date": null,
+      "price": 117.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-05",
+      "return_date": null,
+      "price": 130.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-06",
+      "return_date": null,
+      "price": 130.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-07",
+      "return_date": null,
+      "price": 127.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-08",
+      "return_date": null,
+      "price": 98.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-09",
+      "return_date": null,
+      "price": 117.0,
+      "currency": "GBP"
+    },
+    {
+      "departure_date": "2026-06-10",
+      "return_date": null,
+      "price": 108.0,
+      "currency": "GBP"
+    }
+  ]
+}

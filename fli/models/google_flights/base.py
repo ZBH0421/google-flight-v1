@@ -150,8 +150,8 @@ class FlightLeg(BaseModel):
 
     airline: Airline
     flight_number: str
-    departure_airport: Airport
-    arrival_airport: Airport
+    departure_airport: Airport | None
+    arrival_airport: Airport | None
     departure_datetime: datetime
     arrival_datetime: datetime
     duration: PositiveInt  # in minutes

@@ -225,14 +225,15 @@ class SearchFlights:
         return getattr(Airline, airline_code)
 
     @staticmethod
-    def _parse_airport(airport_code: str) -> Airport:
+    def _parse_airport(airport_code: str) -> Airport | None:
         """Convert airport code to Airport enum.
 
         Args:
             airport_code: Raw airport code from API
 
         Returns:
-            Corresponding Airport enum value
+            Corresponding Airport enum value, or None for unknown codes
+            (e.g. rail station codes like ZWS)
 
         """
-        return getattr(Airport, airport_code)
+        return getattr(Airport, airport_code, None)

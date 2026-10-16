@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -11,17 +11,8 @@ from fli.models import (
 )
 
 
-def _make_new(mock):
-    """Return a __new__ replacement that ignores all arguments and returns mock."""
-
-    def __new__(cls, *args, **kwargs):
-        return mock
-
-    return __new__
-
-
 @pytest.fixture
-def mock_search_flights(monkeypatch):
+def mock_search_flights():
     """Mock the SearchFlights class."""
     mock = MagicMock()
     mock.search.return_value = [
@@ -106,18 +97,16 @@ def mock_search_flights(monkeypatch):
             "total_price": 599.98,
         }
     ]
-    monkeypatch.setattr("fli.search.flights.SearchFlights.__new__", _make_new(mock))
-    monkeypatch.setattr("fli.search.SearchFlights.__new__", _make_new(mock))
-    return mock
+    with patch("fli.cli.commands.flights.SearchFlights", return_value=mock):
+        yield mock
 
 
 @pytest.fixture
-def mock_search_dates(monkeypatch):
+def mock_search_dates():
     """Mock SearchDates class."""
     mock = MagicMock()
-    monkeypatch.setattr("fli.search.dates.SearchDates.__new__", _make_new(mock))
-    monkeypatch.setattr("fli.search.SearchDates.__new__", _make_new(mock))
-    return mock
+    with patch("fli.cli.commands.dates.SearchDates", return_value=mock):
+        yield mock
 
 
 @pytest.fixture
